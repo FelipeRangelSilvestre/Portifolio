@@ -53,6 +53,7 @@
             backdrop-filter: blur(10px);
             z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: padding 0.3s ease;
         }
 
         header .brand {
@@ -77,18 +78,19 @@
 
         /* --- ESTILOS GERAIS DAS SEÇÕES --- */
         .section {
-            padding: 100px 50px;
+            padding: 120px 50px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden; /* Previne barras de rolagem horizontais por causa das animações */
         }
 
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-align: center;
             color: var(--color-light);
         }
@@ -97,6 +99,20 @@
             max-width: 1100px;
             width: 100%;
         }
+
+        /* --- ANIMAÇÃO DE SCROLL (FADE-IN) --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* -------------------------------------- */
+
 
         /* --- SEÇÃO HOME (INÍCIO) --- */
         #home {
@@ -186,10 +202,10 @@
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .project-card { background-color: var(--color-bg-alt); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .project-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px -5px var(--shadow-color); }
-        .project-card img { width: 100%; height: 200px; object-fit: cover; }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
         .project-info { padding: 20px; }
         .project-info h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .project-info p { color: var(--color-subtle); margin-bottom: 20px; }
+        .project-info p { color: var(--color-subtle); margin-bottom: 20px; font-size: 0.95rem; }
         .project-links a { color: var(--color-accent-hover); text-decoration: none; font-weight: 600; margin-right: 20px; }
         .project-links a:hover { text-decoration: underline; }
 
@@ -235,8 +251,8 @@
 
     <section class="section" id="sobre">
         <div class="container">
-            <h2 class="section-title">Sobre Mim</h2>
-            <div class="content">
+            <h2 class="section-title reveal-on-scroll">Sobre Mim</h2>
+            <div class="content reveal-on-scroll">
                 <div class="about-image">
                     <img src="https://scontent.fpll3-1.fna.fbcdn.net/v/t39.30808-6/548210104_24286088774396685_8263644636840803029_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeG3znhI79uVnhqx4IAl2CTopb88qj3jz4SlvzyqPePPhE78dznRexcqVZCr4_9nruGCHDMy8Bt1MpHZEvq3Xd5Q&_nc_ohc=C_SfDw1_EZsQ7kNvwGLkq3F&_nc_oc=Adl8U7yDLm9l2YGV3zRo5j-pKtsHy1CzYcsrikwMS_3gTJlViTo02ZSkZueAZNaDknfE3gHNaogmp6p5ZoBFdLb8&_nc_zt=23&_nc_ht=scontent.fpll3-1.fna&_nc_gid=_NNflrsXtMYIk3LQtJHNpw&oh=00_AfZIhYk1W7-1J73zPcYFdq4_TMw6iaYc3kzWrdZGE7KeDA&oe=68D1451A" alt="Foto do Felipe Rangel">
                 </div>
@@ -251,9 +267,9 @@
 
     <section class="section" id="projetos">
         <div class="container">
-            <h2 class="section-title">Meus Projetos</h2>
+            <h2 class="section-title reveal-on-scroll">Meus Projetos</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card reveal-on-scroll">
                     <img src="https://via.placeholder.com/400x250/0f172a/7c3aed?text=Projeto+1" alt="Imagem do Projeto 1">
                     <div class="project-info">
                         <h3>Nome do Projeto 1</h3>
@@ -264,7 +280,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card reveal-on-scroll">
                     <img src="https://via.placeholder.com/400x250/0f172a/7c3aed?text=Projeto+2" alt="Imagem do Projeto 2">
                     <div class="project-info">
                         <h3>Nome do Projeto 2</h3>
@@ -275,7 +291,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card reveal-on-scroll">
                     <img src="https://via.placeholder.com/400x250/0f172a/7c3aed?text=Projeto+3" alt="Imagem do Projeto 3">
                     <div class="project-info">
                         <h3>Nome do Projeto 3</h3>
@@ -286,12 +302,12 @@
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
     </section>
 
     <section class="section" id="contato">
-        <div class="container">
+        <div class="container reveal-on-scroll">
             <h2 class="section-title">Entre em Contato</h2>
             <div class="contact-info">
                 <p>Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para me contatar através das minhas redes ou pelo e-mail abaixo. Vamos construir algo incrível juntos!</p>
@@ -324,22 +340,40 @@
             // Script para marcar link ativo na navegação ao rolar
             const sections = document.querySelectorAll('.section');
             const navLinks = document.querySelectorAll('header .navigation a');
-
             window.addEventListener('scroll', () => {
-                let current = '';
+                let current = 'home';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     if (pageYOffset >= sectionTop - 60) {
                         current = section.getAttribute('id');
                     }
                 });
-
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href').includes(current)) {
                         link.classList.add('active');
                     }
                 });
+            });
+
+            // NOVO: Script para animação de scroll (Fade-in)
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const observerOptions = {
+                root: null, // usa o viewport como referência
+                threshold: 0.1 // aciona quando 10% do elemento está visível
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Deixa de observar depois que a animação acontece
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(element => {
+                observer.observe(element);
             });
         });
     </script>
