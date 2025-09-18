@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    : Seu nome principal.
+    : Sua profissão ou curso.
+    : Sua frase de efeito.
+    : O link da sua foto de perfil.
+    : Seus links para redes sociais e contato.
+    : O e-mail que será copiado.
+    : Seu número de WhatsApp (formato internacional).
+    : Sua chamada para ação final.
+    : Personalize a paleta de cores nas variáveis CSS.
+
+    ===================================================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Rangel - Cartão de Visita Digital</title>
+    <meta name="description" content="Portfólio rápido de Rangel, Graduando em Sistemas de Informação e Desenvolvedor Frontend. Entre em contato!">
+    <meta name="author" content="Rangel">
+
+    <style>
+        /* ===================================================================
+        ||||| CSS INTERNO - ESTILOS DO CARTÃO |||||
+        ===================================================================
+        */
+
+        /* TROCAR_CORES: Altere estas variáveis para customizar a aparência. */
+        :root {
+            --color-dark: #0f172a; /* Fundo escuro do cartão */
+            --color-light: #f8fafc; /* Cor do texto principal */
+            --color-accent: #7c3aed; /* Roxo vibrante para destaques */
+            --color-accent-hover: #8b5cf6; /* Roxo mais claro para hover */
+            --color-subtle: #94a3b8; /* Cinza claro para subtítulos */
+            --gradient-start: #1e293b; /* Início do gradiente do fundo */
+            --gradient-end: #0f172a; /* Fim do gradiente do fundo */
+            --shadow-color: rgba(0, 0, 0, 0.2); /* Sombra do cartão e botões */
+            --toast-bg: #10b981; /* Fundo da notificação de sucesso */
+        }
+
+        /* Reset Básico e Estilos Globais */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            background-color: var(--gradient-start);
+            background-image: linear-gradient(160deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: var(--color-light);
+            line-height: 1.6;
+        }
+
+        /* Estrutura do Cartão */
+        .card {
+            background-color: var(--color-dark);
+            max-width: 420px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px -5px var(--shadow-color);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Foto de Perfil */
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* Deixa a foto circular */
+            /* Para efeito Polaroid, comente o border-radius e descomente abaixo: */
+            /* border-radius: 12px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transform: rotate(-2deg); 
+            */
+            object-fit: cover;
+            margin-bottom: 24px;
+            border: 3px solid var(--color-accent);
+            padding: 4px;
+            background-color: var(--color-dark);
+        }
+
+        /* Conteúdo de Texto */
+        .name {
+            font-size: 2rem; /* 32px */
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--color-light);
+        }
+
+        .subtitle {
+            font-size: 1rem; /* 16px */
+            font-weight: 400;
+            color: var(--color-subtle);
+            margin-bottom: 16px;
+        }
+
+        .tagline {
+            font-size: 1.125rem; /* 18px */
+            font-weight: 500;
+            color: var(--color-light);
+            margin-bottom: 32px;
+        }
+
+        /* Links Magnéticos */
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .magnetic-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--color-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        
+        .magnetic-link:hover, .magnetic-link:focus {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px -2px rgba(124, 58, 237, 0.4);
+            background-color: var(--color-accent);
+            outline: none; /* Remove o outline padrão, a sombra já dá o feedback */
+        }
+        
+        .magnetic-link:focus-visible { /* Acessibilidade para teclado */
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .magnetic-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        
+        /* Botão de Copiar E-mail (estilo similar aos links) */
+        button.magnetic-link {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* Contato Secundário */
+        .secondary-contact {
+            font-size: 0.9rem;
+            color: var(--color-subtle);
+        }
+        
+        .secondary-contact a {
+            color: var(--color-accent-hover);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .secondary-contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Toast de Notificação (E-mail copiado!) */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--toast-bg);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /*
+        ===================================================================
+        ||||| VERSÃO COMPACTA DO CSS (PARA REFERÊNCIA) |||||
+        ===================================================================
+        
+        :root{--color-dark:#0f172a;--color-light:#f8fafc;--color-accent:#7c3aed;--color-accent-hover:#8b5cf6;--color-subtle:#94a3b8;--gradient-start:#1e293b;--gradient-end:#0f172a;--shadow-color:rgba(0,0,0,0.2);--toast-bg:#10b981}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";display:flex;justify-content:center;align-items:center;padding:24px;background-color:var(--gradient-start);background-image:linear-gradient(160deg,var(--gradient-start) 0%,var(--gradient-end) 100%);color:var(--color-light);line-height:1.6}.card{background-color:var(--color-dark);max-width:420px;width:100%;padding:40px;border-radius:24px;box-shadow:0 10px 30px -5px var(--shadow-color);text-align:center;border:1px solid rgba(255,255,255,0.1);overflow:hidden;position:relative}.profile-pic{width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:24px;border:3px solid var(--color-accent);padding:4px;background-color:var(--color-dark)}.name{font-size:2rem;font-weight:700;margin-bottom:4px;color:var(--color-light)}.subtitle{font-size:1rem;font-weight:400;color:var(--color-subtle);margin-bottom:16px}.tagline{font-size:1.125rem;font-weight:500;color:var(--color-light);margin-bottom:32px}.links-container{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:32px}.magnetic-link{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;background-color:rgba(255,255,255,0.05);color:var(--color-light);text-decoration:none;font-weight:600;font-size:.9rem;border:1px solid rgba(255,255,255,0.1);transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}.magnetic-link:hover,.magnetic-link:focus{transform:translateY(-5px) scale(1.05);box-shadow:0 8px 20px -2px rgba(124,58,237,0.4);background-color:var(--color-accent);outline:none}.magnetic-link:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}.magnetic-link svg{width:20px;height:20px;fill:currentColor}button.magnetic-link{cursor:pointer;font-family:inherit}.secondary-contact{font-size:.9rem;color:var(--color-subtle)}.secondary-contact a{color:var(--color-accent-hover);text-decoration:none;font-weight:600}.secondary-contact a:hover{text-decoration:underline}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background-color:var(--toast-bg);color:white;padding:12px 24px;border-radius:8px;font-weight:600;box-shadow:0 4px 15px rgba(0,0,0,0.2);opacity:0;visibility:hidden;transition:transform .3s ease,opacity .3s ease,visibility .3s;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+
+        */
+    </style>
+</head>
+<body>
+
+    <main class="card">
+        <img 
+            src="https://via.placeholder.com/600x600" 
+            alt="Foto do Rangel" 
+            class="profile-pic"
+            loading="lazy">
+
+        <h1 class="name">Rangel</h1>
+        <p class="subtitle">Graduando em Sistemas de Informação | Dev Frontend</p>
+        <p class="tagline">Construindo experiências digitais com foco em UX e performance.</p>
+
+        <div class="links-container">
+            <a href="#" target="_blank" rel="noopener noreferrer" class="magnetic-link" aria-label="Visitar meu perfil no GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                <span>GitHub</span>
+            </a>
+
+            <a href="#" target="_blank" rel="noopener noreferrer" class="magnetic-link" aria-label="Conectar-se comigo no LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span>LinkedIn</span>
+            </a>
+            
+            <a href="https://wa.me/5592000000000" target="_blank" rel="noopener noreferrer" class="magnetic-link" aria-label="Enviar uma mensagem no WhatsApp">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.908 6.161l-1.317 4.816 4.918-1.286z"/></svg>
+                <span>WhatsApp</span>
+            </a>
+
+            <button id="copy-email-btn" data-email="rangel@email.com" class="magnetic-link" aria-label="Copiar e-mail para a área de transferência">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                <span>E-mail</span>
+            </button>
+        </div>
+
+        <footer class="secondary-contact">
+            <p>Vamos conversar? <a href="https://cal.com/" target="_blank" rel="noopener noreferrer">Agende um café virtual!</a></p>
+        </footer>
+    </main>
+
+    <div id="toast-notification" class="toast" role="alert" aria-live="assertive">
+        E-mail copiado! &#x1F44D;
+    </div>
+
+    <script>
+        /* ===================================================================
+        ||||| JAVASCRIPT EMBUTIDO - INTERATIVIDADE |||||
+        ===================================================================
+        */
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyEmailBtn = document.getElementById('copy-email-btn');
+            const toastNotification = document.getElementById('toast-notification');
+
+            if (copyEmailBtn && toastNotification) {
+                copyEmailBtn.addEventListener('click', () => {
+                    // Pega o e-mail do atributo 'data-email'
+                    const emailToCopy = copyEmailBtn.dataset.email;
+
+                    // A API navigator.clipboard é moderna e segura
+                    navigator.clipboard.writeText(emailToCopy).then(() => {
+                        // Sucesso! Mostra o toast.
+                        toastNotification.classList.add('show');
+
+                        // Esconde o toast após 3 segundos
+                        setTimeout(() => {
+                            toastNotification.classList.remove('show');
+                        }, 3000);
+                    }).catch(err => {
+                        // Fallback ou erro
+                        console.error('Falha ao copiar o e-mail: ', err);
+                        alert('Não foi possível copiar o e-mail. Por favor, copie manualmente: ' + emailToCopy);
+                    });
+                });
+            }
+        });
+    </script>
+    
+    </body>
+</html>
