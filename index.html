@@ -1,290 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Felipe Rangel - Cartão de Visita Digital</title>
-    <meta name="description" content="Portfólio rápido de Felipe Rangel, Desenvolvedor Frontend e estudante de Sistemas de Informação. Entre em contato!">
-    <meta name="author" content="Felipe Rangel">
-
-    <style>
-        :root {
-            --color-dark: #0f172a;
-            --color-light: #f8fafc;
-            --color-accent: #7c3aed;
-            --color-accent-hover: #8b5cf6;
-            --color-subtle: #94a3b8;
-            --gradient-start: #1e293b;
-            --gradient-end: #0f172a;
-            --shadow-color: rgba(0, 0, 0, 0.2);
-            --toast-bg: #10b981;
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            background-color: var(--gradient-start);
-            background-image: linear-gradient(160deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-            color: var(--color-light);
-            line-height: 1.6;
-        }
-
-        .card {
-            background-color: var(--color-dark);
-            max-width: 420px;
-            width: 100%;
-            padding: 32px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px -5px var(--shadow-color);
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 24px;
-            border: 3px solid var(--color-accent);
-            padding: 4px;
-            background-color: var(--color-dark);
-        }
-
-        .name {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 8px; /* Aumentado o espaço para a animação */
-            color: var(--color-light);
-        }
-
-        /* --- INÍCIO: ESTILOS DA ANIMAÇÃO DE TEXTO --- */
-        .subtitle-animated {
-            font-size: 1.125rem; /* 18px */
-            color: var(--color-subtle);
-            height: 27px; /* Altura de uma linha de texto para evitar pulos de layout */
-            margin-bottom: 16px;
-            display: inline-flex; /* Para centralizar corretamente */
-        }
-
-        .subtitle-animated span {
-            position: relative;
-            top: 0;
-            animation: slide 12s steps(3) infinite; /* 12s total / 3 frases = 4s por frase */
-        }
-        
-        @keyframes slide {
-            100% {
-                top: -81px; /* 3 frases * 27px de altura */
-            }
-        }
-
-        .subtitle-animated span::after {
-            content: '';
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            background: var(--color-dark); /* Cor de fundo do cartão para "apagar" o texto */
-            border-left: 2px solid var(--color-subtle);
-            animation: typing 4s steps(20) infinite; /* 4s por frase */
-        }
-        
-        @keyframes typing {
-            40%, 60% {
-                left: calc(100% + 4px); /* Mantém o cursor no final */
-            }
-            100% {
-                left: 0; /* Reseta a "cortina" para o início */
-            }
-        }
-        /* --- FIM: ESTILOS DA ANIMAÇÃO DE TEXTO --- */
-
-        .tagline {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--color-light);
-            margin-bottom: 32px;
-        }
-
-        .links-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 32px;
-        }
-
-        .magnetic-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 18px;
-            border-radius: 12px;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--color-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-        }
-        
-        .magnetic-link:hover, .magnetic-link:focus {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px -2px rgba(124, 58, 237, 0.4);
-            background-color: var(--color-accent);
-            outline: none;
-        }
-        
-        .magnetic-link:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-
-        .magnetic-link svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-        
-        button.magnetic-link {
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .secondary-contact {
-            font-size: 0.9rem;
-            color: var(--color-subtle);
-        }
-        
-        .secondary-contact a {
-            color: var(--color-accent-hover);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .secondary-contact a:hover {
-            text-decoration: underline;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background-color: var(--toast-bg);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
-            z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio - Rangel</title>
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Estilo -->
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #0f172a;
+      color: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 350px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #38bdf8;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    .card h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+    }
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .socials a {
+      font-size: 1.5rem;
+      color: #38bdf8;
+      transition: 0.3s;
+    }
+    .socials a:hover {
+      color: #facc15;
+      transform: scale(1.2);
+    }
+  </style>
 </head>
 <body>
-
-    <main class="card">
-        <img 
-            src="https://scontent.fpll3-1.fna.fbcdn.net/v/t39.30808-6/548210104_24286088774396685_8263644636840803029_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeG3znhI79uVnhqx4IAl2CTopb88qj3jz4SlvzyqPePPhE78dznRexcqVZCr4_9nruGCHDMy8Bt1MpHZEvq3Xd5Q&_nc_ohc=C_SfDw1_EZsQ7kNvwGLkq3F&_nc_oc=Adl8U7yDLm9l2YGV3zRo5j-pKtsHy1CzYcsrikwMS_3gTJlViTo02ZSkZueAZNaDknfE3gHNaogmp6p5ZoBFdLb8&_nc_zt=23&_nc_ht=scontent.fpll3-1.fna&_nc_gid=_NNflrsXtMYIk3LQtJHNpw&oh=00_AfZIhYk1W7-1J73zPcYFdq4_TMw6iaYc3kzWrdZGE7KeDA&oe=68D1451A" 
-            alt="Foto do Felipe Rangel" 
-            class="profile-pic"
-            loading="lazy">
-
-        <h1 class="name">Felipe Rangel</h1>
-        
-        <div class="subtitle-animated">
-            <span>
-                Dev Frontend<br>
-                Estudante de SI<br>
-                UI/UX Enthusiast
-            </span>
-        </div>
-        
-        <p class="tagline">Construindo experiências digitais com foco em performance.</p>
-
-        <div class="links-container">
-            <a href="https://feliperangelsilvestre.github.io/Portifolio/" target="_blank" rel="noopener noreferrer" class="magnetic-link" aria-label="Ver meu portfólio">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1h-2v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                <span>Portfólio</span>
-            </a>
-            
-            <a href="https://github.com/FelipeRangelSilvestre" target="_blank" rel="noopener noreferrer" class="magnetic-link" aria-label="Visitar meu perfil no GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-                <span>GitHub</span>
-            </a>
-
-            <a href="https://www.linkedin.com/in/felipe-rangel-silvestre-3ba0331a0/" target="_blank" rel="noopener noreferrer" class="magnetic-link" aria-label="Conectar-se comigo no LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                <span>LinkedIn</span>
-            </a>
-            
-            <a href="https://wa.me/5592992332399" target="_blank" rel="noopener noreferrer" class="magnetic-link" aria-label="Enviar uma mensagem no WhatsApp">
-                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.908 6.161l-1.317 4.816 4.918-1.286z"/></svg>
-                <span>WhatsApp</span>
-            </a>
-
-            <button id="copy-email-btn" data-email="felipe.silvestre@gmail.com" class="magnetic-link" aria-label="Copiar e-mail para a área de transferência">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
-                <span>E-mail</span>
-            </button>
-        </div>
-
-        <footer class="secondary-contact">
-            <p>Vamos conversar? <a href="#" target="_blank" rel="noopener noreferrer">Agende um café virtual!</a></p>
-        </footer>
-    </main>
-
-    <div id="toast-notification" class="toast" role="alert" aria-live="assertive">
-        E-mail copiado! &#x1F44D;
+  <div class="card">
+    <img src="sua-foto.jpg" alt="Foto de Rangel">
+    <h1>Felipe Rangel</h1>
+    <p>Estudante de Sistemas de Informação • Dev em construção</p>
+    <div class="socials">
+      <a href="https://github.com/seuusuario" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/seuusuario" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://instagram.com/seuusuario" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const copyEmailBtn = document.getElementById('copy-email-btn');
-            const toastNotification = document.getElementById('toast-notification');
-
-            if (copyEmailBtn && toastNotification) {
-                copyEmailBtn.addEventListener('click', () => {
-                    const emailToCopy = copyEmailBtn.dataset.email;
-
-                    navigator.clipboard.writeText(emailToCopy).then(() => {
-                        toastNotification.classList.add('show');
-                        setTimeout(() => {
-                            toastNotification.classList.remove('show');
-                        }, 3000);
-                    }).catch(err => {
-                        console.error('Falha ao copiar o e-mail: ', err);
-                        alert('Não foi possível copiar o e-mail. Por favor, copie manualmente: ' + emailToCopy);
-                    });
-                });
-            }
-        });
-    </script>
+  </div>
 </body>
 </html>
